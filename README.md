@@ -10,4 +10,4 @@ A simple automated backup system for [n8n](https://n8n.io).
 ## Installation
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/<YourUser>/n8n-backuper/main/install.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/mard1n3na/n8n-backuper/main/install.sh | sudo bash
