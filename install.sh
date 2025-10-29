@@ -5,14 +5,29 @@ echo "────────────────────────�
 echo "🧠 n8n Backuper Installer"
 echo "──────────────────────────────"
 
-# گرفتن ورودی‌ها
-read -p "Enter your Telegram Bot Token: " BOT_TOKEN
-read -p "Enter your Telegram Chat ID: " CHAT_ID
-read -p "Enter backup interval in hours (e.g. 1): " INTERVAL
+# اطمینان از اجرای اسکریپت به‌صورت تعاملی
+if [ ! -t 0 ]; then
+  echo "⚠️ This script requires interactive input. Please run it with:"
+  echo "bash install.sh"
+  exit 1
+fi
 
-# بررسی ورودی INTERVAL (باید عدد باشه)
+# ─── گرفتن ورودی‌ها ───────────────────────────────
+read -rp "Enter your Telegram Bot Token: " BOT_TOKEN
+while [[ -z "$BOT_TOKEN" ]]; do
+  echo "❌ Token cannot be empty!"
+  read -rp "Enter your Telegram Bot Token: " BOT_TOKEN
+done
+
+read -rp "Enter your Telegram Chat ID: " CHAT_ID
+while [[ -z "$CHAT_ID" ]]; do
+  echo "❌ Chat ID cannot be empty!"
+  read -rp "Enter your Telegram Chat ID: " CHAT_ID
+done
+
+read -rp "Enter backup interval in hours (e.g. 1): " INTERVAL
 if [[ -z "$INTERVAL" || ! "$INTERVAL" =~ ^[0-9]+$ ]]; then
-  echo "⚠️ Invalid interval input! Using default of 1 hour."
+  echo "⚠️ Invalid input. Using default interval of 1 hour."
   INTERVAL=1
 fi
 
